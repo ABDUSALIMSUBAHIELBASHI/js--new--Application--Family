@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abdu — Application Family / Portfolio</title>
+  <meta name="description" content="Responsive portfolio & family app example — HTML, CSS, JavaScript. Shows languages, projects, contact and a family task timetable." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#111b1b;
+      --dark:#1f665d;
+      --muted:oklab(14.99% -0.00651 0.00946);
+      --card:hsl(24, 83%, 53%);
+      --glass: rgba(212, 201, 201, 0.65);
+      --radius:14px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#0b0c0e 0%, hsl(218, 85%, 5%) 100%);
+      color:var(--dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:48px;
+    }
+
+    .container{max-width:1100px;margin:28px auto;padding:0 20px}
+    .navbar{display:flex;align-items:center;justify-content:space-between;background:var(--accent);color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 8px 24px rgba(74,144,226,0.18)}
+    .brand{display:flex;gap:12px;align-items:center;font-weight:700}
+    .logo-circle{width:44px;height:44px;border-radius:10px;background:white;color:var(--accent);display:grid;place-items:center;font-weight:700}
+    nav ul{display:flex;gap:14px;list-style:none}
+    nav a{color:hwb(60 90% 2%);text-decoration:none;font-weight:600;font-size:0.95rem}
+    .menu-toggle{display:none;font-size:1.4rem;cursor:pointer}
+
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:26px;margin-top:18px}
+    .card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:0 12px 30px rgba(16,24,40,0.06)}
+    .intro h1{font-size:1.6rem;margin-bottom:8px}
+    .intro p{color:var(--muted)}
+    .cta{margin-top:14px;display:flex;gap:12px}
+    .btn{background:var(--accent);color:hwb(286 15% 38%);border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
+    .btn.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+
+    .profile{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .avatar{width:150px;height:150px;border-radius:18px;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:grid;place-items:center;font-size:2.2rem;font-weight:700;color:var(--accent)}
+    .skills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+    .tag{background:var(--glass);padding:8px 10px;border-radius:999px;font-weight:600;color:var(--dark);font-size:0.86rem}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+    .projects{display:grid;gap:14px}
+    .project{padding:14px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfdff);border:1px solid rgba(74,144,226,0.06)}
+    .project h3{font-size:1.02rem;margin-bottom:6px}
+    .project p{font-size:0.92rem;color:var(--muted)}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid #0a0909;text-align:left}
+    thead th{background:transparent;color:var(--accent);font-weight:700}
+
+    .contact-row{display:flex;gap:12px}
+    .contact-row .col{flex:1}
+
+    .muted{color:var(--muted);font-size:0.9rem}
+
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr 320px}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:428px){ 
+      .container{padding:0 14px}
+      .hero{grid-template-columns:1fr}
+      .menu-toggle{display:block}
+      nav ul{display:none;position:absolute;right:18px;top:70px;background:var(--accent);padding:12px;border-radius:10px;flex-direction:column}
+      nav ul.open{display:flex}
+      .profile .avatar{width:120px;height:120px}
+      .grid-3{grid-template-columns:1fr}
+    }
+    @media (max-width:390px){ 
+      .intro h1{font-size:1.3rem}
+      .avatar{width:110px;height:110px }
+      .avatar img{
+        border-radius: 50px;
+      }
+    }
+    @media (max-width:360px){ 
+      .brand{font-size:0.95rem}
+      .intro p{font-size:0.92rem}
+      .cta{flex-direction:column}
+      .btn{width:100%}
+    }
+
+    footer{margin-top:28px;text-align:center;color:var(--muted)}
+
+    .row{display:flex;gap:12px;align-items:center}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace}
+  </style>
+</head>
+<body>
+    <script src="index.js"></script>
+  <div class="container">
+    <header class="navbar">
+      <div class="brand">
+        <div class="logo-circle" style="background-color: rgb(226, 230, 238);">AF</div>
+        <div>
+          <div style="font-size:0.95rem">Application Family</div>
+          <div style="font-size:0.78rem;opacity:0.9">Portfolio & family planner</div>
+        </div>
+      </div>
+
+      <nav style="color: hsl(218, 85%, 5%); border-radius: 10px;">
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        <ul id="navList">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#languages">Languages</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#timetable">Timetable</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="card intro">
+          <h1 style="color: black;">Hi — I'm Abdu. I build simple, useful web apps.</h1>
+          <p class="muted" style="background-color: white;">This is a clean, responsive single-file
+             starter site that includes a family task timetable, 
+             a languages & skills section and a small projects 
+             gallery. Works well on iPhone SE, XR, iPhone 12,
+              Samsung Galaxy widths.</p>
+
+          <div class="row cta">
+            <button class="btn" onclick="scrollToSection('projects')">View Projects</button>
+            <a class="btn ghost" href="#contact">Contact</a>
+          </div>
+
+          <div style="margin-top:18px">
+            <h4 style="margin-bottom:8px">Key skills</h4>
+            <div class="skills">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Python</span>
+              <span class="tag">PHP</span>
+              <span class="tag">C / C++</span>
+              <span class="tag">C#</span>
+            </div>
+          </div>
+
+        </div>
+
+        <aside class="card profile">
+          <div class="avatar"> <img src="b.jpeg" width="200px" height="200px"  alt=""></div>
+          <div style="text-align:center">
+            <div style="border-radius: 10px; color:white;">Abdu Salim</div>
+            <div class="muted" style="background-color: olivedrab; border-radius: 10px;">Full-stack enthusiast • Family apps</div>
+          </div>
+
+          <div style="width:100%;margin-top:8px">
+            <div class="row" style="justify-content:space-between">
+              <div class="muted">Location</div>
+              <div class="mono">Kigali, Rwanda</div>
+            </div>
+            <div class="row" style="justify-content:space-between;margin-top:6px">
+              <div class="muted">Email</div>
+              <div class="mono">abdu@example.com</div>
+            </div>
+          </div>
+
+          <div style="width:100%;margin-top:12px;text-align:center">
+            <a class="btn" href="#contact">Send message</a>
+          </div>
+        </aside>
+      </section>
+
+      <section id="projects" class="grid-3">
+        <div class="card projects">
+          <h2 style="margin-bottom:10px">Projects</h2>
+          <div class="project">
+            <h3>Family Task Planner</h3>
+            <p>Add tasks for family members, set room, day and time. Small client-side timetable with responsive layout.</p>
+            <div style="margin-top:8px" class="row">
+              <small class="muted">HTML • CSS • JavaScript</small>
+              <div style="flex:1"></div>
+              <button class="btn" onclick="scrollToSection('timetable')">Open</button>
+            </div>
+          </div>
+
+          <div class="project">
+            <h3>Portfolio Template</h3>
+            <p>A single-file responsive portfolio you can edit and reuse. Works on phones and desktop.</p>
+            <div style="margin-top:8px" class="row">
+              <small class="muted">HTML • CSS</small>
+              <div style="flex:1"></div>
+              <button class="btn" onclick="window.scrollTo(0,0)">Top</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Languages & Proficiency</h2>
+          <table>
+            <thead>
+              <tr><th>Language / Tech</th><th>Level</th></tr>
+            </thead>
+            <tbody id="langsTable">
+              <tr><td>HTML</td><td>Expert</td></tr>
+              <tr><td>CSS</td><td>Expert</td></tr>
+              <tr><td>JavaScript</td><td>Advanced</td></tr>
+              <tr><td>Python</td><td>Intermediate</td></tr>
+              <tr><td>PHP</td><td>Intermediate</td></tr>
+              <tr><td>C / C++</td><td>Basic / Academic</td></tr>
+              <tr><td>C#</td><td>Basic</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>Quick Links</h2>
+          <p class="muted">Handy links for GitHub, WhatsApp, Google and your email.</p>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+            <a class="tag" href="https://github.com/" target="_blank">GitHub</a>
+            <a class="tag" href="https://www.whatsapp.com/" target="_blank">WhatsApp</a>
+            <a class="tag" href="https://www.google.com/" target="_blank">Google</a>
+            <a class="tag" href="mailto:abdu@example.com">Email Abdu</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="timetable" class="card" style="margin-top:18px">
+        <h2 style="margin-bottom:12px">Family Timetable</h2>
+        <form id="taskForm" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;align-items:end">
+          <div>
+            <label class="muted">Family</label>
+            <input id="family" required placeholder="Uwimana" />
+          </div>
+          <div>
+            <label class="muted">Member</label>
+            <input id="member" required placeholder="Alice" />
+          </div>
+          <div>
+            <label class="muted">Room</label>
+            <select id="room">
+              <option>Kitchen</option>
+              <option>Bedroom</option>
+              <option>Living Room</option>
+              <option>Bathroom</option>
+            </select>
+          </div>
+          <div>
+            <label class="muted">Time</label>
+            <input id="time" type="time" required />
+          </div>
+          <div style="grid-column:1/3">
+            <label class="muted">Task</label>
+            <input id="task" placeholder="e.g. Cleaning" required />
+          </div>
+          <div>
+            <label class="muted">Day</label>
+            <select id="day">
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+          </div>
+          <div style="grid-column:4/5;text-align:right">
+            <button class="btn" type="submit">Add</button>
+          </div>
+        </form>
+
+        <div style="margin-top:14px;overflow:auto">
+          <table id="timetableTable">
+            <thead>
+              <tr><th>Family</th><th>Member</th><th>Room</th><th>Task</th><th>Day</th><th>Time</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Smith</td><td>John</td><td>Kitchen</td><td>Cooking</td><td>Monday</td><td>18:00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="contact" class="card" style="margin-top:18px">
+        <h2>Contact & Login</h2>
+        <div class="contact-row" style="margin-top:12px">
+          <div class="col">
+            <form onsubmit="event.preventDefault(); alert('Message sent (demo)')">
+              <label class="muted">Email</label>
+              <input required type="email" placeholder="you@example.com" />
+              <label class="muted" style="margin-top:8px">Message</label>
+              <textarea placeholder="Hi Abdu..." rows="4" style="width:100%;padding:10px;border-radius:8px"></textarea>
+              <div style="margin-top:10px"><button class="btn" type="submit">Send</button></div>
+            </form>
+          </div>
+
+          <div class="col">
+            <h4>Login</h4>
+            <form onsubmit="event.preventDefault(); alert('Login (demo)')">
+              <label class="muted">Email</label>
+              <input type="email" required placeholder="family@example.com" />
+              <label class="muted" style="margin-top:8px">Password</label>
+              <input type="password" required placeholder="••••••" />
+              <div style="margin-top:10px"><button class="btn ghost" type="submit">Login</button></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer style="background-color: hwb(22 87% 9%);">
+      <p class="muted">Application ELAF<code class="mono">12/8/2025</code>Abdu </p>
+    </footer>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    menuToggle && menuToggle.addEventListener('click', ()=>{
+      navList.classList.toggle('open');
+    });
+
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    const taskForm = document.getElementById('taskForm');
+    const timetableTable = document.querySelector('#timetableTable tbody');
+
+    taskForm && taskForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const family = document.getElementById('family').value.trim();
+      const member = document.getElementById('member').value.trim();
+      const room = document.getElementById('room').value;
+      const task = document.getElementById('task').value.trim();
+      const day = document.getElementById('day').value;
+      const time = document.getElementById('time').value;
+      if(!family||!member||!task||!time) return alert('Please fill required fields.');
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${escapeHtml(family)}</td><td>${escapeHtml(member)}</td><td>${escapeHtml(room)}</td><td>${escapeHtml(task)}</td><td>${escapeHtml(day)}</td><td>${escapeHtml(time)}</td>`;
+      timetableTable.appendChild(tr);
+
+      taskForm.reset();
+    });
+
+    function escapeHtml(s){
+      return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+    }
+
+   
+    menuToggle && menuToggle.addEventListener('keydown', (e)=>{ if(e.key==='Enter') menuToggle.click(); });
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  </script>
+</body>
+</html>
