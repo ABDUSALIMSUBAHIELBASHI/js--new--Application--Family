@@ -82,7 +82,7 @@
 
     footer{margin-top:28px;text-align:center;color:#ddd;font-size:0.9rem}
 
-    /* RESPONSIVE FIXES */
+    
     @media (max-width:1024px){
       .hero{grid-template-columns:1fr 320px}
       .grid-3{grid-template-columns:repeat(2,1fr)}
@@ -258,16 +258,17 @@
           <div class="col">
             <form onsubmit="event.preventDefault();alert('Message sent (demo)')">
               <label>Email</label>
-              <input required type="email" placeholder="you@example.com" />
+              <input required type="email" placeolder="you@example.com" />
               <label style="margin-top:8px">Message</label>
               <textarea placeholder="Hi Abdu..." rows="4"></textarea>
               <div style="margin-top:10px"><button class="btn" type="submit">Send</button></div>
             </form>
           </div>
-          <div class="col">
+          <div class="col">h
             <h4>Login</h4>
             <form onsubmit="event.preventDefault();alert('Login (demo)')">
               <label>Email</label>
+              
               <input type="email" required placeholder="family@example.com" />
               <label style="margin-top:8px">Password</label>
               <input type="password" required placeholder="••••••" />
@@ -291,6 +292,8 @@
     function scrollToSection(id){
       document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
     }
+alert('Login (demo)');
+alert('Message sent (demo)');
 
     const taskForm=document.getElementById('taskForm');
     const tableBody=document.querySelector('#timetableTable tbody');
