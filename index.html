@@ -268,7 +268,6 @@
             <h4>Login</h4>
             <form onsubmit="event.preventDefault();alert('Login (demo)')">
               <label>Email</label>
-              
               <input type="email" required placeholder="family@example.com" />
               <label style="margin-top:8px">Password</label>
               <input type="password" required placeholder="••••••" />
@@ -292,8 +291,6 @@
     function scrollToSection(id){
       document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
     }
-alert('Login (demo)');
-alert('Message sent (demo)');
 
     const taskForm=document.getElementById('taskForm');
     const tableBody=document.querySelector('#timetableTable tbody');
